@@ -462,11 +462,11 @@ int main()
                                                 )";
     
 
-    cout<<"\t\tName - "<<d1.fname<<" "<<d1.lname;
-    cout<<"\t\tAge - "<<d1.age;
-    cout<<"\t\tQuiz Selected - "<<chc;
-    cout<<"\t\tDate - "<<(tPtr->tm_mday)<<"/"<< (tPtr->tm_mon)+1 <<"/"<< (tPtr->tm_year)+1900;
-    cout<<"\t\tTime Completed The Test - "<<time_taken <<" secs";
+    cout<<"\n\t\tName - "<<d1.fname<<" "<<d1.lname;
+    cout<<"\n\t\tAge - "<<d1.age;
+    cout<<"\n\t\tQuiz Selected - "<<chc;
+    cout<<"\n\t\tDate - "<<(tPtr->tm_mday)<<"/"<< (tPtr->tm_mon)+1 <<"/"<< (tPtr->tm_year)+1900;
+    cout<<"\n\t\tTime Completed The Test - "<<time_taken <<" secs";
     cout<<"\n\n";
     
     cout<<"\n\t\tYour Score  In The Exam - "<<score<<" Out Of 60";
