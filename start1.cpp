@@ -2,8 +2,9 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
-#include <stdlib.h>
 #include <windows.h>
+#include <ctime>
+
 
 using namespace std;
 
@@ -19,7 +20,6 @@ class details
         cout<<"\n\t\tEnter Your First Name - "; cin>>fname;
         cout<<"\n\t\tEnter Your Last Name  - "; cin>>lname;
         cout<<"\n\t\tEnter Your Age        - "; cin>>age; cout<<"\n";
-        system("cls");
     }
 };
 
@@ -54,7 +54,7 @@ int main()
     cout<<"Welcome , "<<d1.fname<<" "<<d1.lname<< "!!!\n";
     cout<<"This is a quiz taking program. Here, we will test your knowledge in 2 fields - Computer Science or Indian History (Your Choice).\n";
     cout<<"The dataset contains equal difficulty level questions (ranging from easy to medium) and will occur to user in non chronogical order.\n";
-    Sleep(4000);
+    Sleep(3000);
     cout<<"Below are rules for the quiz.\n\n\n";
     cout<<"\t\t\tRULES";
     cout<<"\n1. There Will Be Total 15 Question (5 Easy, 5 Medium, 5 Difficult)";
@@ -62,14 +62,14 @@ int main()
     cout<<"\n3. The Question Will Contains 4 Options & Only 1 Correct Option";
     cout<<"\n4. User Have To Respond To The Answer By Pressing Option Number (1 , 2 , 3 or 4)";
     cout<<"\n5. User Giving Response Other Than Option Number Will Give User 0 And Skips To Next Question";
-    cout<<"\n\n\t\t\t All The Best "<<d1.fname<<" !!!";
+    cout<<"\n\n\t\t\t All The Best "<<d1.fname<<" !!!\n\n";
     system("pause");
     
     
     //clearing the screen and displaying the quiz selection
     system("cls");   
     cout<<"\t\t\tQuiz Selection\n\n";
-    cout<<"1. Computer Science Quiz (Contains Questions Related To Basics Of Computer Hardware & Programming Language\n\n";
+    cout<<"1. Computer Science Quiz (Contains Questions Related To Basics Of Computer Hardware & Programming Language)\n\n";
     cout<<"2. Indian History Quiz   (Contains Questions Related To Ancient & Modern History Of India)";
     select:
     cout<<"\n\nChoice Of Quiz - "; cin>>choice;
@@ -91,163 +91,410 @@ int main()
     {
         cout<<"\nOh No!, Dear "<<d1.fname<<" , You Selected Wrong Option. Select The Option Again";
         goto select;
-    }                                                                                                      
+    }    
 
-    int no=0;
+    string chc;
+    if(choice == 1) 
+    {   
+        chc = "Computer Science";
+    }
+    if(choice == 2) 
+    {
+        chc = "Indian History";
+    }          
+    
+    //saving current time and day
+    time_t t = time(NULL);
+    tm* tPtr = localtime(&t);
+    time_t start, end;
+
+    //declaration of variables
+    int no = 0;
     bool har = 0;
     int b = 0;
-    int ans[10];
+    int ans[5];
     float score = 0;
-    int anshard[10] = {1,1,1,1,1,1,1,1,1,1}; //ans of hard questions
-    int ansmedi[10] = {1,1,1,1,1,1,1,1,1,1}; //ans of medium questions
-    int anseasy[10] = {1,1,1,1,1,1,1,1,1,1}; //ans of easy questions
+    
+    int anshard[5] = {4,4,3,1,1}; //ans of hard questions
+    int ansmedi[5] = {2,3,3,2,3}; //ans of medium questions
+    int anseasy[5] = {1,3,2,3,4}; //ans of easy questions
     int ansin;
+    
+    int esc = 0, msc = 0, hsc = 0;
     int k = 0;
     int h = 0, i = 0 , j = 0, l = 0, ea = 0, q = 0; 
     float correct = 0;
-    char ch;
-    string x[10], y[10], z[10];
+    char ch; 
+    string x[5], y[5], z[5];
     
     char s[100];
     ifstream medium; 
     ifstream easy; 
     ifstream hard;
     int e = 0, m = 0 , n = 0, main = 0;
-    cout<<"Welcome To The Quiz\n";
-    cout<<"\nThe Rules\n"; //writing the rules
-    o1:
-    cout<<"\nPress 1 To Continue\n";
-    cin>>ch;
-    while (main<=9)
+
+    int h1, m1, s1;
+    
+    switch(choice)
     {
-        medium.open("qmedium.txt"); //opening medium questions file
-        for(int i = 0 ; i <= 9 ; i++)
-        {
-            getline(medium,x[i]); //reading the whole file
-            if(i==main)   //displaying the quesiton which we want
+        //if the user selects CS Quiz
+        case 1:   
+        { 
+            cout<<"\t\t\tWelcome To The Computer Science Quiz\n";
+            cout<<"\nThe Next Screen Will Start The Quiz In 5 Seconds";
+            Sleep(5000);
+            system("cls");
+            h1 = tPtr->tm_hour;
+            m1 = tPtr->tm_min;
+            s1 = tPtr->tm_sec;
+            time(&start);
+            while (main<=4)
             {
-                no++;
-                system("cls");   //clearing the screen
-                cout<<"Q = \n";
-                cout<<"("<<no<<")"<<x[i]<<"\n";
-                cout<<"Please Select The Right Option (1,2,3,4) - \n";
-                cin>>ansin;      //input the answer by user
-            }
-            if(ansin == ansmedi[main]) //check if the ans is right
-            {
-                correct++;      //updating the correct value
-                score+= 4;      //updating the score
-                q = main - ea;    //decreasing the value of main as our requirement
-                h++;
-                hard.open("qhard.txt"); //opening the hard file
-                for(int j = 0; j <= 9 ; j++)
+                medium.open("csqmedium.txt"); //opening medium questions file
+                for(int i = 0 ; i <= 4 ; i++)
                 {
-                    getline(hard,y[j]);  //reading the hard file
-                }
-                if(j==q)        //displaying the question which we want
-                {
-                    no++;
-                    system("cls");
-                    cout<<"Q - \n";
-                    cout<<"("<<no<<")"<<y[j]<<"\n";
-                    cout<<"Please Select The Right Option (1,2,3,4)\n";
-                    cin>>ansin;
-                    if(ansin==anshard[j])
+                    getline(medium, x[i]); //reading the whole file
+                    if(i==main)   //displaying the quesiton which we want
                     {
-                        correct++;
-                        score += 5; //updating the score
-                    }
-                 }
-            }
-            else        //if the ans of user is wrong
-            {
-                ea++;     
-                l = main - h;     //decreasing the value of main as our requirement
-                easy.open("qeasy.txt");
-                for(int k = 0; k<=9 ;k++)
-                {
-                    getline(easy, z[k]); //reading the whole file
-                }
-                if(k==l)    //displaying the question which we want
-                {
-                    no++;
-                    system("cls");
-                    cout<<"Q - \n";
-                    cout<<"("<<no<<")"<<z[k]<<"\n";
-                    cout<<"Please Select The Right Option (1,2,3,4)\n";
-                    cin>>ansin;
-                    if(ansin ==anseasy[k])
-                    {
-                        correct++;
-                        score += 3; //updating the score
+                        no++;
+                        system("cls");   //clearing the screen
+                        cout<<"Q - ";
+                        cout<<no<<" "<<x[i]<<"\n";
+                        cout<<"Please Select The Right Option (1,2,3,4) - ";
+                        cin>>ansin;      //input the answer by user
                     }
                 }
-            }
-        }
-        main++;
-        if(main==10)     //displaying the question of easy and hard which are left after the completion of medium questions
-        {
-            if(ea<=9 || h<=9)
-            {
-                while(ea<=9)
+                if(ansin == ansmedi[main]) //check if the ans is right
                 {
-                    easy.open("qeasy.txt");    //opening the file
-                    for(int t = 0 ; t <= 10; t++)
+                    msc++;          //updating correct no of medium level question
+                    correct++;      //updating the correct value
+                    score+= 4;      //updating the score
+                    q = main - ea;    //decreasing the value of main as our requirement
+                    h++;
+                    hard.open("csqhard.txt"); //opening the hard file
+                    for(int j = 0; j <= 4 ; j++)
                     {
-                        getline(easy, z[t]);   //reading the whhole file
-                        if(t==ea)              //displaying the remaning question
+                        getline(hard,y[j]);  //reading the hard file
+                        if(j==q)        //displaying the question which we want
                         {
                             no++;
                             system("cls");
-                            cout<<"Q - \n";
-                            cout<<"("<<no<<")"<<z[k]<<"\n";
-                            cout<<"Please Select The Right Option (1,2,3,4)\n";
+                            cout<<"Q - ";
+                            cout<<no<<" "<<y[j]<<"\n";
+                            cout<<"Please Select The Right Option (1,2,3,4) - ";
                             cin>>ansin;
-                            if(ansin==anseasy[t])  //updating the score if the ans is right;
+                            if(ansin==anshard[j])
                             {
+                                hsc++;      //updating correct no of hard level question
                                 correct++;
-                                score += 3;
+                                score += 5; //updating the score
+                            }
+                        }
+                    } 
+                }
+                else        //if the ans of user is wrong
+                {
+                    ea++;     
+                    l = main - h;     //decreasing the value of main as our requirement
+                    easy.open("csqeasy.txt");
+                    for(int k = 0; k<=4 ;k++)
+                    {
+                        getline(easy, z[k]); //reading the whole file
+                        if(k==l)    //displaying the question which we want
+                        {
+                            no++;
+                            system("cls");
+                            cout<<"Q - ";
+                            cout<<no<<" "<<z[k]<<"\n";
+                            cout<<"Please Select The Right Option (1,2,3,4) - ";
+                            cin>>ansin;
+                            if(ansin ==anseasy[k])
+                            {
+                                esc++;      //updating correct no of easy level question
+                                correct++;
+                                score += 3; //updating the score
                             }
                         }
                     }
                 }
-                ea++;
-                if(ea==10)
+                main++;
+                if(main==5)     //displaying the question of easy and hard which are left after the completion of medium questions
                 {
-                    while(h<=10)   //displaying the remaining questions of hard file
+                    if(ea<=4 || h<=4)
                     {
-                        hard.open("qhard.txt");
-                        for(int u = 0; u <= 10 ; u++)
+                        while(ea<=4)
                         {
-                            getline(hard,y[u]);  //reading the hard file
-                            if(h == u)        //displaying the question which we want
+                            easy.open("csqeasy.txt");    //opening the file
+                            for(int t = 0 ; t <= 4; t++)
                             {
-                                no++;
-                                system("cls");
-                                cout<<"Q - \n";
-                                cout<<"("<<no<<")"<<y[u]<<"\n";
-                                cout<<"Please Select The Right Option (1,2,3,4)\n";
-                                cin>>ansin;
-                                if(ansin==anshard[u])
+                                getline(easy, z[t]);   //reading the whhole file
+                                if(t==ea)              //displaying the remaning question
                                 {
-                                    correct++;
-                                    score += 5; //updating the score
+                                    no++;
+                                    system("cls");
+                                    cout<<"Q - ";
+                                    cout<<no<<" "<<z[k]<<"\n";
+                                    cout<<"Please Select The Right Option (1,2,3,4) - ";
+                                    cin>>ansin;
+                                    if(ansin==anseasy[t])  //updating the score if the ans is right;
+                                    {
+                                        esc++;      //updating correct no of easy level question
+                                        correct++;
+                                        score += 3;
+                                    }
                                 }
                             }
-                        }    
+                            ea++;
+                        }
+                        if(ea==5)
+                        {
+                            while(h<=5)   //displaying the remaining questions of hard file
+                            {
+                                hard.open("csqhard.txt");
+                                for(int u = 0; u <= 4 ; u++)
+                                {
+                                    getline(hard,y[u]);  //reading the hard file
+                                    if(h == u)        //displaying the question which we want
+                                    {
+                                        no++;
+                                        system("cls");
+                                        cout<<"Q - ";
+                                        cout<<no<<" "<<y[u]<<"\n";
+                                        cout<<"Please Select The Right Option (1,2,3,4) - ";
+                                        cin>>ansin;
+                                        if(ansin==anshard[u])
+                                        {
+                                            hsc++;      //updating correct no of hard level question
+                                            correct++;
+                                            score += 5; //updating the score
+                                        }
+                                    }
+                                }    
+                                h++;
+                                if(h==5)
+                                {
+                                    break;
+                                }
+                            }
+                        }
                     }
-                    h++;
-                    if(h==10)
-                    {
-                        break;
-                    }
-                }
+                }          
             }
         }
+        time(&end);
+        break;
+
+        //if the user selects IH QUIZ
+        //exactly same as previous case , just the file is different
+        case 2:   
+        { 
+            cout<<"\t\t\tWelcome To The Indian History Quiz\n";
+            cout<<"\nThe Next Screen Will Start The Quiz In 5 Seconds";
+            Sleep(5000);
+            system("cls");
+            h1 = tPtr->tm_hour;
+            m1 = tPtr->tm_min;
+            s1 = tPtr->tm_sec;
+            time(&start);
+            while (main<=4)
+            {
+                medium.open("ihqmedium.txt"); //opening medium questions file
+                for(int i = 0 ; i <= 4 ; i++)
+                {
+                    getline(medium, x[i]); //reading the whole file
+                    if(i==main)   //displaying the quesiton which we want
+                    {
+                        no++;
+                        system("cls");   //clearing the screen
+                        cout<<"Q = ";
+                        cout<<no<<" "<<x[i]<<"\n";
+                        cout<<"Please Select The Right Option (1,2,3,4) - ";
+                        cin>>ansin;      //input the answer by user
+                    }
+                }
+                if(ansin == ansmedi[main]) //check if the ans is right
+                {
+                    msc++;          //updating correct no of medium level question
+                    correct++;      //updating the correct value
+                    score+= 4;      //updating the score
+                    q = main - ea;  //decreasing the value of main as our requirement
+                    h++;
+                    hard.open("ihqhard.txt"); //opening the hard file
+                    for(int j = 0; j <= 4 ; j++)
+                    {
+                        getline(hard,y[j]);  //reading the hard file
+                        if(j==q)        //displaying the question which we want
+                        {
+                            no++;
+                            system("cls");
+                            cout<<"Q - ";
+                            cout<<no<<" "<<y[j]<<"\n";
+                            cout<<"Please Select The Right Option (1,2,3,4) - ";
+                            cin>>ansin;
+                            if(ansin==anshard[j])
+                            {
+                                hsc++;      //updating correct no of hard level question
+                                correct++;
+                                score += 5; //updating the score
+                            }
+                        }
+                    } 
+                }
+                else        //if the ans of user is wrong
+                {
+                    ea++;     
+                    l = main - h;     //decreasing the value of main as our requirement
+                    easy.open("ihqeasy.txt");
+                    for(int k = 0; k<=4 ;k++)
+                    {
+                        getline(easy, z[k]); //reading the whole file
+                        if(k==l)    //displaying the question which we want
+                        {
+                            no++;
+                            system("cls");
+                            cout<<"Q - ";
+                            cout<<no<<" "<<z[k]<<"\n";
+                            cout<<"Please Select The Right Option (1,2,3,4) - ";
+                            cin>>ansin;
+                            if(ansin ==anseasy[k])
+                            {
+                                esc++;      //updating correct no of easy level question
+                                correct++;
+                                score += 3; //updating the score
+                            }
+                        }
+                    }
+                }
+                main++;
+                if(main==5)     //displaying the question of easy and hard which are left after the completion of medium questions
+                {
+                    if(ea<=4 || h<=4)
+                    {
+                        while(ea<=4)
+                        {
+                            easy.open("ihqeasy.txt");    //opening the file
+                            for(int t = 0 ; t <= 4; t++)
+                            {
+                                getline(easy, z[t]);   //reading the whhole file
+                                if(t==ea)              //displaying the remaning question
+                                {
+                                    no++;
+                                    system("cls");
+                                    cout<<"Q - ";
+                                    cout<<no<<" "<<z[k]<<"\n";
+                                    cout<<"Please Select The Right Option (1,2,3,4) - ";
+                                    cin>>ansin;
+                                    if(ansin==anseasy[t])  //updating the score if the ans is right;
+                                    {
+                                        esc++;      //updating correct no of easy level question
+                                        correct++;
+                                        score += 3;
+                                    }
+                                }
+                            }
+                            ea++;
+                        }
+                        if(ea==5)
+                        {
+                            while(h<=5)   //displaying the remaining questions of hard file
+                            {
+                                hard.open("ihqhard.txt");
+                                for(int u = 0; u <= 4 ; u++)
+                                {
+                                    getline(hard,y[u]);  //reading the hard file
+                                    if(h == u)        //displaying the question which we want
+                                    {
+                                        no++;
+                                        system("cls");
+                                        cout<<"Q - ";
+                                        cout<<no<<" "<<y[u]<<"\n";
+                                        cout<<"Please Select The Right Option (1,2,3,4) - ";
+                                        cin>>ansin;
+                                        if(ansin==anshard[u])
+                                        {
+                                            hsc++;      //updating correct no of hard level question
+                                            correct++;
+                                            score += 5; //updating the score
+                                        }
+                                    }
+                                }    
+                                h++;
+                                if(h==5)
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }       
+            }
+        }
+        time(&end);
+        break;
     }
+
+    double time_taken = double(end - start);
+
     system("cls");
-    cout<<"Your Score  In The Exam - "<<score<<" Out Of 120";
-    cout<<"\nYou Answered - "<<correct<<" Questions Correctly";
-    cout<<"\nYou Answered - "<<30-correct<<" Question Wronged";
+    cout<<"Thank You ! , Your Quiz Is Over. Please Wait While We Save Your Details And Later Show Your Scorecard.";
+    Sleep(3000);
+    system("cls");
+    
+    //saving details into a file
+    ofstream of1("results.txt", ios::app);
+    of1<<"\n\nName - "<<d1.fname<<" "<<d1.lname;
+    of1<<"\nAge - "<<d1.age;
+    of1<<"\nQuiz Selected - "<<chc;
+    of1<<"\nDate Played - "<<(tPtr->tm_mday)<<"/"<< (tPtr->tm_mon)+1 <<"/"<< (tPtr->tm_year)+1900;
+    of1<<"\nTime Started The Quiz - "<<(tPtr->tm_hour)<<":"<< (tPtr->tm_min)<<":"<< (tPtr->tm_sec);
+    of1<<"\nTime Completed The Test (In Secs) - "<<time_taken <<" secs";
+    of1<<"\nScore (Out Of 60) - "<<score;
+    of1<<"\nQuestions Correct (Out Of 15) - "<<correct<<endl;
+
+    
+    //displaying scorecard and addtional statistics
+    cout<<R"(
+                        ____                      ____              _ 
+                       / ___|  ___ ___  _ __ ___ / ___|__ _ _ __ __| |
+                        \___ \ / __/ _ \| '__/ _ \ |   / _` | '__/ _`|
+                        ___) | (_| (_) | | |  __/ |__| (_| | | | (_| |
+                       |____/ \___\___/|_|  \___|\____\__,_|_|  \__,_|
+                                                )";
+    
+
+    cout<<"\t\tName - "<<d1.fname<<" "<<d1.lname;
+    cout<<"\t\tAge - "<<d1.age;
+    cout<<"\t\tQuiz Selected - "<<chc;
+    cout<<"\t\tDate - "<<(tPtr->tm_mday)<<"/"<< (tPtr->tm_mon)+1 <<"/"<< (tPtr->tm_year)+1900;
+    cout<<"\t\tTime Completed The Test - "<<time_taken <<" secs";
+    cout<<"\n\n";
+    
+    cout<<"\n\t\tYour Score  In The Exam - "<<score<<" Out Of 60";
+    cout<<"\n\t\tYou Answered - "<<correct<<" Questions Correctly";
+    cout<<"\n\t\tYou Answered - "<<15-correct<<" Question Wronged";
+    cout<<"\n\t\tCorrect Question In : Easy -> "<<esc<<", Medium -> "<<msc<<" & Hard ->"<<hsc;
+    cout<<"\n\n\n\n";
+    
+    
+    cout<<
+    R"(                                                                                                                                  
+ _________________  ____   ____        ____  _____   ______    ____    ____         _____      _____        _____     ____   ____ 
+/                 \|    | |    |  ____|\   \|\    \ |\     \  |    |  |    |       |\    \    /    /|  ____|\    \   |    | |    |
+\______     ______/|    | |    | /    /\    \\\    \| \     \ |    |  |    |       | \    \  /    / | /     /\    \  |    | |    |
+   \( /    /  )/   |    |_|    ||    |  |    |\|    \  \     ||    | /    //       |  \____\/    /  //     /  \    \ |    | |    |
+    ' |   |   '    |    .-.    ||    |__|    | |     \  |    ||    |/ _ _//         \ |    /    /  /|     |    |    ||    | |    |
+      |   |        |    | |    ||    .--.    | |      \ |    ||    |\    \'          \|___/    /  / |     |    |    ||    | |    |
+     /   //        |    | |    ||    |  |    | |    |\ \|    ||    | \    \              /    /  /  |\     \  /    /||    | |    |
+    /___//         |____| |____||____|  |____| |____||\_____/||____|  \____\            /____/  /   | \_____\/____/ ||\___\_|____|
+   |`   |          |    | |    ||    |  |    | |    |/ \|   |||    |   |    |          |`    | /     \ |    ||    | /| |    |    |
+   |____|          |____| |____||____|  |____| |____|   |___|/|____|   |____|          |_____|/       \|____||____|/  \|____|____|
+     \(              \(     )/    \(      )/     \(       )/    \(       )/               )/             \(    )/        \(   )/  
+      '               '     '      '      '       '       '      '       '                '               '    '          '   '   
+                                                                                                                                  )";
+    
+    cout<<"\n\n";
+    Sleep(5000);
+    system("pause");
+    system("cls");
     return 0;
 }

@@ -1,5 +1,5 @@
-What memory below is the largest?                A. 1TB    B. 1GB      C. 10GB      D. 55000 Bytes              
-What is the most used search engine?             A. Yahoo  B. Bing     C. Google    D. SOSO                     
-One byte is equivalent to ?                      A. 4 bits B. 8 bits   C. 12 bits   D. 32 bits                  
-Find the odd one out ?                           A. Mouse  B. Keyboard C. Printer   D. Touch screen             
-Which of the following is NOT operating system ? A. Dos    B. Unix     C. Window NT D. Java                     
+What Memory Below Is The Largest?                   1. 1TB    2. 1GB      3. 10GB       4. 55000 Bytes              
+What Is The Most Used Search Engine?                1. Yahoo  2. Bing     3. Google     4. SOSO                     
+One Byte Is Equivalent To ?                         1. 4 bits 2. 8 bits   3. 12 bits    4. 32 bits                  
+Find The Odd One Out                                1. Mouse  2. Keyboard 3. Printer    4. Touch screen             
+Which Of The Following Is Not An Operating System ? 1. Dos    2. Unix     3. Windows NT 4. Java                     

@@ -1,5 +1,5 @@
-CD-ROM is a kind of?                         A. Optical Disk  B. Magnetic Disk  C. Magneto-Optical Disk  D. None of these    
-Web pages are written using ?                A. FTP           B. UML            C. HTML                  D. URL              
-'Linux' is an example of                     A. Software      B. Application    C. Operating System      D. Browser          
-Intersection of columns and rows is called ? A. Data          B. Table          C. Cell                  D. Schema           
-Which protocol is used to send e-mail        A. HTTP          B. POP3           C. SMTP                  D. SSH              
+CD-ROM Is A Kind Of?                       1. Optical Disk  2. Magnetic Disk  3. Magneto-Optical Disk  4. None of these    
+Web Pages Are Written Using ?              1. FTP           2. UML            3. HTML                  4. URL              
+'Linux' Is An Example Of                   1. Software      2. Application    3. Operating System      4. Browser          
+Intersection Of Columns & Rows Is Called ? 1. Data          2. Table          3. Cell                  4. Schema           
+Which Protocol Is Used To Send E-mail      1. HTTP          2. POP3           3. SMTP                  4. SSH              

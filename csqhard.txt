@@ -1,5 +1,5 @@
-Who invented the Graphical User Interface (GUI)?         A. Microsoft B. Apple        C. Bell Labs D.  Xerox       
-Who invented the Universal Serial Bus (USB)?             A. Microsoft B. Apple        C. AMD       D. Intel        
-India’s first super computer is ?                        A. Agni      B. Flow solver  C. Param     D. Trisul       
-Which video standard is designed to replace PCI and AGP? A. PCIe      B. VLB          C. PCI       D. AGPx         
-Which is a single integrated circuit?                    A. Gate      B. Mother Board C. Chip      D. CPU          
+Who Invented The Graphical User Interface (GUI)?       1. Microsoft 2. Apple        3. Bell Labs 4. Xerox       
+Who Invented The Universal Serial Bus (USB)?           1. Microsoft 2. Apple        3. AMD       4. Intel        
+India's First Super Computer Is ?                      1. Agni      2. Flow solver  3. Param     4. Trisul       
+Which Video standard Is Designed To Replace PCI & AGP? 1. PCIe      2. VLB          3. PCI       4. AGPx         
+Which Is A Single Integrated Circuit?                  1. Gate      2. Mother Board 3. Chip      4. CPU          
