@@ -2,21 +2,97 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
-#include <iomanip>
 #include <stdlib.h>
 #include <windows.h>
 
 using namespace std;
-void gotoxy(int x, int y)
+
+//creating a class which will take user details and will use for saving purpose
+class details
 {
-    COORD coord;
-    coord.X = x;
-    coord.Y = y;
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-}
-void starline();
+    public:
+    string fname, lname ;
+    int age;
+    details()
+    {
+        cout<<"\n\n";
+        cout<<"\n\t\tEnter Your First Name - "; cin>>fname;
+        cout<<"\n\t\tEnter Your Last Name  - "; cin>>lname;
+        cout<<"\n\t\tEnter Your Age        - "; cin>>age; cout<<"\n";
+        system("cls");
+    }
+};
+
 int main()
 {   
+    //initiating the quiz with showing ascii art first
+    cout<<
+ R"( 
+
+#####################################################################
+#  _    _  ____  __    ___  _____  __  __  ____    ____  _____      #
+# ( \/\/ )( ___)(  )  / __)(  _  )(  \/  )( ___)  (_  _)(  _  )     #
+#  )    (  )__)  )(__( (__  )(_)(  )    (  )__)     )(   )(_)(      #
+# (__/\__)(____)(____)\___)(_____)(_/\/\_)(____)   (__) (_____)     #
+#                    _____  __  __  ____  ____                      #
+#                   (  _  )(  )(  )(_  _)(_   )                     #
+#                    )(_)(  )(__)(  _)(_  / /_                      #
+#                   (___/\\(______)(____)(____)                     #
+#                                                                   #
+#####################################################################)";
+    
+    //taking details
+    details d1;
+    char btn;
+    int choice;
+    cout<<"Loading.............";
+    Sleep(3000);
+
+    //clearing the screen and displaying the rules of the quiz game
+    system("cls");
+    cout<<"\n\n";
+    cout<<"Welcome , "<<d1.fname<<" "<<d1.lname<< "!!!\n";
+    cout<<"This is a quiz taking program. Here, we will test your knowledge in 2 fields - Computer Science or Indian History (Your Choice).\n";
+    cout<<"The dataset contains equal difficulty level questions (ranging from easy to medium) and will occur to user in non chronogical order.\n";
+    Sleep(4000);
+    cout<<"Below are rules for the quiz.\n\n\n";
+    cout<<"\t\t\tRULES";
+    cout<<"\n1. There Will Be Total 15 Question (5 Easy, 5 Medium, 5 Difficult)";
+    cout<<"\n2. Total Marks For The Quiz - 60 (15 M for Easy, 20 M for Medium, 25 M for Hard)";
+    cout<<"\n3. The Question Will Contains 4 Options & Only 1 Correct Option";
+    cout<<"\n4. User Have To Respond To The Answer By Pressing Option Number (1 , 2 , 3 or 4)";
+    cout<<"\n5. User Giving Response Other Than Option Number Will Give User 0 And Skips To Next Question";
+    cout<<"\n\n\t\t\t All The Best "<<d1.fname<<" !!!";
+    system("pause");
+    
+    
+    //clearing the screen and displaying the quiz selection
+    system("cls");   
+    cout<<"\t\t\tQuiz Selection\n\n";
+    cout<<"1. Computer Science Quiz (Contains Questions Related To Basics Of Computer Hardware & Programming Language\n\n";
+    cout<<"2. Indian History Quiz   (Contains Questions Related To Ancient & Modern History Of India)";
+    select:
+    cout<<"\n\nChoice Of Quiz - "; cin>>choice;
+    if(choice == 1)
+    {
+        cout<<"\nDear, "<<d1.fname<<", You Selected Computer Science Quiz. Now The Next Screen Will Start Your Quiz\n";
+        system("pause");
+        Sleep(3000);
+        system("cls");
+    }
+    else if (choice  == 2)
+    {
+        cout<<"\nDear, "<<d1.fname<<", You Selected Indian History Quiz. Now The Next Screen Will Start Your Quiz\n";
+        system("pause");
+        Sleep(3000);
+        system("cls");
+    }
+    else
+    {
+        cout<<"\nOh No!, Dear "<<d1.fname<<" , You Selected Wrong Option. Select The Option Again";
+        goto select;
+    }                                                                                                      
+
     int no=0;
     bool har = 0;
     int b = 0;
@@ -36,14 +112,8 @@ int main()
     ifstream medium; 
     ifstream easy; 
     ifstream hard;
-    
     int e = 0, m = 0 , n = 0, main = 0;
-    starline();
-    starline();
-    gotoxy(50,2);
     cout<<"Welcome To The Quiz\n";
-    starline();
-    starline();
     cout<<"\nThe Rules\n"; //writing the rules
     o1:
     cout<<"\nPress 1 To Continue\n";
@@ -177,16 +247,7 @@ int main()
     }
     system("cls");
     cout<<"Your Score  In The Exam - "<<score<<" Out Of 120";
-    cout<<"\nYou Answered - "<<correct<<"Questions Correctly";
-    cout<<"\nYou Answered - "<<30-correct<<"Question Wronged";
+    cout<<"\nYou Answered - "<<correct<<" Questions Correctly";
+    cout<<"\nYou Answered - "<<30-correct<<" Question Wronged";
     return 0;
-}
-
-void starline()         //function definition
-{
-    for(int i = 0 ; i <=119; i++)
-    {
-        cout<<"*";
-    } 
-    cout<<"\n";
 }
